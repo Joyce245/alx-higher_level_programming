@@ -1,23 +1,19 @@
 #!/usr/bin/python3
-"""Make a query Like"""
+
+"""
+lists all states with a name starting with N (upper N)
+"""
 import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    db = MySQLdb.connect(host="localhost",
-                         port=3306,
-                         user=sys.argv[2],
-                         passwd=sys.argv[1],
-                         db=sys.argv[3])
-
-    cur = db.cursor()
-
-    # Execute the query
-    cur.execute('SELECT id, name FROM states\
-    WHERE name COLLATE latin1_general_cs LIKE "N%" ORDER BY states.id ASC;')
-
-    for row in cur.fetchall():
+    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
+                         passwd=sys.argv[2], db=sys.argv[3], port=3306)
+    myCursor = db.cursor()
+    myCursor.execute("SELECT * FROM states WHERE name LIKE BINARY 'N%'\
+                      ORDER BY states.id ASC")
+    rows = myCursor.fetchall()
+    for row in rows:
         print(row)
-
-    cur.close()
+    myCursor.close()
     db.close()

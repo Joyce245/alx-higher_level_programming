@@ -1,28 +1,22 @@
 #!/usr/bin/python3
-"""Find the peak in an array"""
-
-
-def FindAPeak(arr, i, j):
-    """Binary Search"""
-    mid = int((i + j) / 2)
-    # if mid element is peak
-    if (mid == len(arr)-1 or arr[mid] >= arr[mid+1]) and\
-       (mid == 0 or arr[mid] >= arr[mid-1]):
-        return arr[mid]
-    # when your peak exists in the right half
-    if arr[mid] < arr[mid+1] and mid+1 < len(arr):
-        return FindAPeak(arr, mid+1, j)
-    # when your peak exists in the left half
-    else:
-        return FindAPeak(arr, i, mid-1)
+""" Find the peak in a list """
 
 
 def find_peak(list_of_integers):
-    """Pass to the list"""
-    l = list_of_integers
-
-    if len(l) == 0:
+    """Find the peak"""
+    list_l = len(list_of_integers)
+    if list_l is 0:
         return None
+    peak = binary_search(list_of_integers, 0, list_l - 1)
+    return list_of_integers[peak]
 
-    peak = FindAPeak(l, 0, len(l) - 1)
-    return peak
+
+def binary_search(a, lo, hi):
+    """Recursive binary search of the peak"""
+    if lo >= hi:
+        return lo
+    mid = ((hi - lo) // 2) + lo
+    if a[mid] > a[mid + 1]:
+        return binary_search(a, lo, mid)
+    else:
+        return binary_search(a, mid + 1, hi)

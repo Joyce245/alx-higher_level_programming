@@ -1,20 +1,22 @@
 #!/usr/bin/python3
-"""Use the package request and connect to the github api"""
-if __name__ == "__main__":
-    from requests.auth import HTTPBasicAuth
-    import requests
-    import sys
+"""Check status"""
+import requests
+from requests.auth import HTTPBasicAuth
+import sys
 
-    user = sys.argv[1]
-    pwd = sys.argv[2]
 
-    r = requests.get(
-        'https://api.github.com/user',
-        auth=HTTPBasicAuth(user, pwd)
-    )
+def searchapi():
+    """status"""
+    user = str(sys.argv[1])
+    pw = str(sys.argv[2])
+    result = requests.get("https://api.github.com/user",
+                          auth=(HTTPBasicAuth(user, pw)))
 
     try:
-        data = r.json()
-        print(data.get('id'))
+        data = result.json()
+        print(data["id"])
     except:
-        print("Not a valid JSON")
+        print("None")
+
+if __name__ == "__main__":
+    searchapi()

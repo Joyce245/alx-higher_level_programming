@@ -1,18 +1,12 @@
 #!/usr/bin/python3
-"""Send request"""
-import urllib.request
-import urllib.error
-import sys
+"""Send a POST"""
+if __name__ == "__main__":
+    import urllib.request
+    import sys
 
-
-def sender():
-    """sender"""
     try:
         with urllib.request.urlopen(sys.argv[1]) as response:
-            html = response.read()
-            print(html.decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        print("Error code: {}".format(e.code))
-
-if __name__ == "__main__":
-    sender()
+            li = str(response.read().decode('utf-8'))
+            print(li)
+    except urllib.error.HTTPError as error:
+            print("Error code: {}".format(error.code))

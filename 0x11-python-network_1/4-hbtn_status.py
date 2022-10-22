@@ -1,15 +1,9 @@
 #!/usr/bin/python3
-"""Check status"""
-import requests
-
-
-def status():
-    """status"""
-    result = requests.get("https://intranet.hbtn.io/status")
-
-    print("Body response:")
-    print("\t- type: {}".format(type(result.text)))
-    print("\t- content: {}".format(result.text))
-
+"""Use the package request"""
 if __name__ == "__main__":
-    status()
+    import requests
+
+    r = requests.get('https://intranet.hbtn.io/status')
+    print("Body response:")
+    print("\t- type: {}".format(type(r.text)))
+    print("\t- content: {}".format(r.text))

@@ -1,9 +1,14 @@
 #!/usr/bin/python3
-"""Use the package request"""
+"""Check status"""
+import requests
+import sys
+
+
+def header():
+    """status"""
+    result = requests.get(sys.argv[1])
+
+    print(result.headers.get("X-Request-Id", None))
+
 if __name__ == "__main__":
-    import requests
-    import sys
-
-    r = requests.get(sys.argv[1])
-    print(r.headers.get('X-Request-Id'))
-
+    header()
